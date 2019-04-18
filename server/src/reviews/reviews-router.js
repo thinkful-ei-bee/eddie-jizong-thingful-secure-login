@@ -14,13 +14,12 @@ reviewsRouter
     const newReview = { thing_id, rating, text };
 
     for (const [key, value] of Object.entries(newReview))
-      // eslint-disable-next-line eqeqeq
-      if (value == null)
+      if (value === undefined)
         return res.status(400).json({
           error: `Missing '${key}' in request body`
         });
 
-        newReview.user_id = req.user.id
+    newReview.user_id = req.user.id;
 
     ReviewsService.insertReview(
       req.app.get('db'),
